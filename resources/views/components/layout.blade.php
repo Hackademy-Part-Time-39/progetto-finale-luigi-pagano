@@ -7,13 +7,21 @@
     <title>The Aulab Post</title>
 </head>
 <body>
-    <!-- Includi il componente navbar -->
+    <!-- Navbar -->
     <x-navbar />
 
-    <!-- Contenuto dinamico della pagina -->
+    <!-- Visualizzazione dei messaggi di successo generali -->
+    @if (session('success'))
+        <div class="alert alert-success text-center my-3">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    <!-- Contenuto principale -->
     <div class="container my-4">
         {{ $slot }}
     </div>
 </body>
 </html>
+
 

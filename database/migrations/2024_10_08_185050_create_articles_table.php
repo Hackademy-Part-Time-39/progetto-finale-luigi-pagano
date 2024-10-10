@@ -19,10 +19,10 @@ class CreateArticlesTable extends Migration
             $table->string('subtitle'); // Colonna per il sottotitolo
             $table->longtext('body'); // Colonna per il contenuto dell'articolo
             $table->string('image'); // Colonna per il percorso dell'immagine (opzionale)
-            $table->unsigneBigInteger('user_id')->nullable(); // Foreign Key verso la tabella users
-            $table->foreignId('user_id')->references('id')->on('user')->ondelete('SET NULL'); // Foreign Key verso la tabella categories
+            $table->unsignedBigInteger('user_id')->nullable(); // Foreign Key verso la tabella users
+            $table->foreign('user_id')->references('id')->on('users')->ondelete('SET NULL'); // Foreign Key verso la tabella categories
             $table->unsignedBigInteger('category_id')->nullable();
-            $table->foreign('category_id')->references('id')->on('categorues')->onDelete('SET NULL');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('SET NULL');
             $table->timestamps(); // Aggiunge le colonne created_at e updated_at
         });
     }

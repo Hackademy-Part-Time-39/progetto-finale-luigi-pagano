@@ -13,8 +13,14 @@
                 
                 
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Contatti</a>
-                </li>
+    <a class="nav-link" href="{{ route('articles.index') }}">Articoli</a>
+</li>
+                @auth
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('articles.create') }}">Crea Articolo</a>
+    </li>
+@endauth
+
                 @guest
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('login') }}">Login</a>
@@ -33,7 +39,9 @@
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                         @csrf
                     </form>
+                    
                 @endauth
+                
             </ul>
         </div>
     </div>

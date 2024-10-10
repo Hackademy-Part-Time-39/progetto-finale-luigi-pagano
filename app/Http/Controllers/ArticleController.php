@@ -4,83 +4,109 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use Illuminate\Http\Request;
+use App\Models\Category;
 
 class ArticleController extends Controller
 {
     // Metodo per mostrare tutti gli articoli
     public function index()
     {
-        $articles = Article::all(); // Recupera tutti gli articoli dal database
-        return view('articles.index', compact('articles')); // Passa i dati alla vista
+       
+            // Recupera tutti gli articoli dal database
+            $articles = Article::with('user', 'category')->get();
+    
+            // Ritorna la vista 'article.index' e passa la variabile $articles
+            return view('article.index', compact('articles'));
+        
     }
 
-    // Metodo per mostrare il form di creazione di un nuovo articolo
     public function create()
     {
-        return view('articles.create');
+        // Recupera tutte le categorie per mostrarle nel form
+        $categories = Category::all();
+        return view('article.create', compact('categories'));
     }
 
     // Metodo per salvare un nuovo articolo nel database
     public function store(Request $request)
-    {
-        $request->validate([
-            'titolo' => 'required',
-            'sottotitolo' => 'required',
-            'corpo' => 'required',
-            'immagine' => 'nullable|image',
-            'category_id' => 'required|exists:categories,id',
-        ]);
+{
+    // Validazione dei dati
+    $request->validate([
+        'title' => 'required|string|max:255',
+        'subtitle' => 'required|string|max:255',
+        'body' => 'required|string',
+        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        'category_id' => 'required|exists:categories,id',
+    ]);
 
-        // Crea un nuovo articolo
-        $article = new Article($request->all());
-
-        if ($request->hasFile('immagine')) {
-            $article->immagine = $request->file('immagine')->store('images');
-        }
-
-        $article->user_id = auth()->id(); // Associa l'utente autenticato
-        $article->save();
-
-        return redirect()->route('articles.index')->with('success', 'Articolo creato con successo!');
+    // Creazione e salvataggio dell'articolo
+    $article = new Article($request->all());
+    if ($request->hasFile('image')) {
+        $article->image = $request->file('image')->store('images');
     }
+    $article->user_id = auth()->id(); // Associa l'articolo all'utente autenticato
+    $article->save();
+
+    // Reindirizzamento con un messaggio di successo
+    return redirect()->route('articles.index')->with('success', 'Articolo correttamente salvato!');
+}
+
+
+   
 
     // Metodo per mostrare un articolo specifico
     public function show(Article $article)
     {
-        return view('articles.show', compact('article'));
+        return view('article.show', compact('article'));
     }
 
+
     // Metodo per mostrare il form di modifica di un articolo
-    public function edit(Article $article)
+    public function edit($id)
     {
-        return view('articles.edit', compact('article'));
+        $article = Article::findOrFail($id);
+        $categories = Category::all(); 
+        return view('article.edit', compact('article', 'categories'));
     }
 
     // Metodo per aggiornare un articolo nel database
-    public function update(Request $request, Article $article)
-    {
-        $request->validate([
-            'titolo' => 'required',
-            'sottotitolo' => 'required',
-            'corpo' => 'required',
-            'immagine' => 'nullable|image',
-            'category_id' => 'required|exists:categories,id',
-        ]);
+    public function update(Request $request, $id)
+{
+    // Validazione dei dati
+    $request->validate([
+        'title' => 'required|string|max:255',
+        'subtitle' => 'required|string|max:255',
+        'body' => 'required|string',
+        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        'category_id' => 'required|exists:categories,id',
+    ]);
+    
+    // Recupera l'articolo esistente
+    $article = Article::findOrFail($id);
 
-        $article->update($request->all());
+    // Aggiorna i campi
+    $article->update($request->all());
 
-        if ($request->hasFile('immagine')) {
-            $article->immagine = $request->file('immagine')->store('images');
-            $article->save();
-        }
+    // Se l'utente ha caricato una nuova image
+    if ($request->hasFile('image')) {
+        $article->image = $request->file('image')->store('images');
+        $article->save();
+    }
 
-        return redirect()->route('articles.show', $article)->with('success', 'Articolo aggiornato con successo!');
+    // Reindirizza all'elenco degli articoli con un messaggio di successo
+    return redirect()->route('articles.index')->with('success', 'Articolo modificato con successo!');
+
     }
 
     // Metodo per eliminare un articolo dal database
-    public function destroy(Article $article)
+    public function destroy($id)
     {
+        $article = Article::findOrFail($id);
         $article->delete();
+    
+        // Reindirizza all'elenco degli articoli con un messaggio di successo
         return redirect()->route('articles.index')->with('success', 'Articolo eliminato con successo!');
     }
+
+
 }
