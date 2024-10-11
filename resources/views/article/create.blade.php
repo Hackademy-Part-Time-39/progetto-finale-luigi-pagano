@@ -55,7 +55,7 @@
 
                 <!-- Campo per il body dell'Articolo -->
                 <div class="mb-3">
-                    <label for="body" class="form-label">body dell'articolo</label>
+                    <label for="body" class="form-label">corpo dell'articolo</label>
                     <textarea name="body" id="body" class="form-control" rows="5" required>{{ old('body') }}</textarea>
                     @error('body')
                         <div class="text-danger">{{ $message }}</div>

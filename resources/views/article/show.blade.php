@@ -2,14 +2,25 @@
 
 
 <div class="container mt-5">
-    <h1>{{ $article->title }}</h1>
-    <p><strong>Sottotitolo: </strong> {{ $article->subtitle }}</p>
-    <p><strong>Autore: </strong> {{ $article->user->name }}</p>
-    <p><strong>Categoria: </strong> {{ $article->category ? $article->category->name : 'N/A' }}</p>
-    <p><strong>Data di Creazione: </strong> {{ $article->created_at->format('d/m/Y') }}</p>
-    <hr>
-    <div class="content">
-       {{$article->body}}
+    <div class="row">
+        <div class="col-12">
+            <h1>{{ $article->title }}</h1>
+            <p><strong>Categoria:</strong> {{ $article->category->name }}</p>
+            <p><strong>Autore:</strong> {{ $article->user->name }}</p>
+            <p><strong>Data di pubblicazione:</strong> {{ $article->created_at->format('d/m/Y') }}</p>
+        </div>
+        <div class="col-12 my-4">
+            <img src="{{ Storage::url($article->image) }}" alt="{{ $article->title }}" class="img-fluid">
+        </div>
+        <div class="col-12">
+            <h3>{{ $article->subtitle }}</h3>
+            <p>{{ $article->body }}</p>
+        </div>
+        <div class="col-12">
+            <a href="{{ route('article.index') }}" class="btn btn-primary">Torna agli articoli</a>
+        </div>
     </div>
 </div>
+
+
 </x-layout>

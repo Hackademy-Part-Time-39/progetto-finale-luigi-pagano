@@ -1,4 +1,6 @@
 <x-layout>
+
+
 <div class="container mt-5">
     <!-- Messaggi di successo -->
     @if (session('success'))
@@ -31,7 +33,7 @@
                             <td>{{ $article->created_at->format('d/m/Y') }}</td>
                             <td>
                                 <!-- Visualizzare sempre il pulsante "Visualizza" -->
-                                <a href="{{ route('articles.show', $article->id) }}" class="btn btn-info btn-sm">Visualizza</a>
+                                <a href="{{ route('article.show', $article) }}" class="btn btn-primary">Leggi</a>
                                 
                                 <!-- Mostrare i pulsanti Modifica/Elimina solo agli utenti autenticati -->
                                 @auth
@@ -55,9 +57,5 @@
         </div>
     </div>
 </div>
-
-
-
-
 
 </x-layout>

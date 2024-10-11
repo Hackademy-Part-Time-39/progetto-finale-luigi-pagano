@@ -9,16 +9,17 @@ use App\Models\Category;
 class ArticleController extends Controller
 {
     // Metodo per mostrare tutti gli articoli
-    public function index()
-    {
-       
-            // Recupera tutti gli articoli dal database
-            $articles = Article::with('user', 'category')->get();
     
-            // Ritorna la vista 'article.index' e passa la variabile $articles
+    
+        public function index()
+        {
+            // Prende tutti gli articoli ordinati dal più recente al più vecchio
+            $articles = Article::orderBy('created_at', 'desc')->paginate(6); // Utilizza la paginazione, 6 articoli per pagina
+    
+            // Ritorna la vista 'article.index' passando gli articoli
             return view('article.index', compact('articles'));
-        
-    }
+        }
+    
 
     public function create()
     {
@@ -42,7 +43,7 @@ class ArticleController extends Controller
     // Creazione e salvataggio dell'articolo
     $article = new Article($request->all());
     if ($request->hasFile('image')) {
-        $article->image = $request->file('image')->store('images');
+        $article->image = $request->file('image')->store('images','public');
     }
     $article->user_id = auth()->id(); // Associa l'articolo all'utente autenticato
     $article->save();
@@ -94,7 +95,7 @@ class ArticleController extends Controller
     }
 
     // Reindirizza all'elenco degli articoli con un messaggio di successo
-    return redirect()->route('articles.index')->with('success', 'Articolo modificato con successo!');
+    return redirect()->route('article.index')->with('success', 'Articolo modificato con successo!');
 
     }
 
@@ -105,8 +106,33 @@ class ArticleController extends Controller
         $article->delete();
     
         // Reindirizza all'elenco degli articoli con un messaggio di successo
-        return redirect()->route('articles.index')->with('success', 'Articolo eliminato con successo!');
+        return redirect()->route('article.index')->with('success', 'Articolo eliminato con successo!');
     }
+    public function byCategory($categoryId)
+{
+    $category = Category::findOrFail($categoryId);
+    $articles = Article::where('category_id', $categoryId)->orderBy('created_at', 'desc')->paginate(10);
+
+    return view('article.index', compact('articles', 'category'));
+}
+public function byUser($userId)
+{
+    $user = User::findOrFail($userId);
+    $articles = Article::where('user_id', $userId)->orderBy('created_at', 'desc')->paginate(10);
+
+    return view('article.index', compact('articles', 'user'));
+}
+public function category()
+{
+    return $this->belongsTo(Category::class);
+}
+
+public function user()
+{
+    return $this->belongsTo(User::class);
+}
+
+
 
 
 }
