@@ -1,1 +1,107 @@
 @import "bootstrap";
+/* Stile per le card */
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around; /* Distribuisci lo spazio */
+}
+.card {
+    flex: 1 1 calc(33.333% - 20px); /* Card flessibile con margine */
+    box-sizing: border-box; /* Per evitare padding overflow */
+    margin: 10px;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    overflow: hidden; /* Per evitare overflow del contenuto */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Distribuzione interna uniforme */
+    max-width: 300px; /* Imposta una larghezza massima */
+    min-height: 400px; /* Altezza minima per le card */
+   
+}
+.card-content {
+    flex-grow: 1;
+    padding: 10px 0;
+}
+.card-footer {
+    text-align: center;
+    padding-top: 10px;
+}
+
+/* Pulsanti arrotondati */
+.btn-outline-info {
+    border-radius: 20px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-outline-info:hover {
+    background-color: #5dade2;
+    color: white;
+}
+body {
+    background-color: #f5f5f5;
+    color: #2c3e50;
+     
+}
+
+.hero-section {
+    background-color: #eaeaea;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.newsletter-section {
+    background-color: #fdf5e6;
+}
+
+footer {
+    background-color: #2c3e50;
+    color: #f7dc6f;
+    transition: color 0.3s;
+}
+
+
+.card img {
+    max-height: 150px; /* Limita l'altezza delle immagini */
+    width: 100%; /* Immagine larga quanto la card */
+    object-fit: cover; /* Taglia l'immagine se troppo grande */
+}
+
+footer a:hover {
+    color: #5dade2;
+}
+
+
+
+h1, h2, h3, h4, h5, h6 {
+    color: #2c3e50;
+}
+
+/* Pulsanti */
+.btn-primary {
+    background-color: #5dade2;
+    border-color: #5dade2;
+    border-radius: 30px;
+    transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #2c3e50;
+    border-color: #2c3e50;
+}
+
+@media (max-width: 768px) {
+    .card {
+        flex: 1 1 calc(50% - 20px); /* Due card per riga su tablet */
+        min-height: 350px;
+    }
+}
+
+@media (max-width: 576px) {
+    .card {
+        flex: 1 1 calc(100% - 20px); /* Una card per riga su mobile */
+        min-height: 300px;
+    }
+}

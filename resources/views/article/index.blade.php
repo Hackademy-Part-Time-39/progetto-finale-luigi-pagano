@@ -34,6 +34,17 @@
                             <td>
                                 <!-- Visualizzare sempre il pulsante "Visualizza" -->
                                 <a href="{{ route('article.show', $article) }}" class="btn btn-primary">Leggi</a>
+                                <a href="{{ route('article.byCategory', $article->category) }}" class="badge bg-secondary">
+    {{ $article->category->name }}
+</a>
+<p>
+    Pubblicato da:
+    <a href="{{ route('article.byUser', $article->user) }}" class="text-decoration-none">
+        {{ $article->user->name }}
+    </a>
+</p>
+
+
                                 
                                 <!-- Mostrare i pulsanti Modifica/Elimina solo agli utenti autenticati -->
                                 @auth

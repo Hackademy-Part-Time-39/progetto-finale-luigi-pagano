@@ -8,6 +8,20 @@
             <p><strong>Categoria:</strong> {{ $article->category->name }}</p>
             <p><strong>Autore:</strong> {{ $article->user->name }}</p>
             <p><strong>Data di pubblicazione:</strong> {{ $article->created_at->format('d/m/Y') }}</p>
+            <p>
+    Categoria: 
+    <a href="{{ route('article.byCategory', $article->category) }}" class="badge bg-secondary">
+        {{ $article->category->name }}
+    </a>
+</p>
+<p>
+    Scritto da: 
+    <a href="{{ route('article.byUser', $article->user) }}" class="text-decoration-none">
+        {{ $article->user->name }}
+    </a>
+</p>
+
+
         </div>
         <div class="col-12 my-4">
             <img src="{{ Storage::url($article->image) }}" alt="{{ $article->title }}" class="img-fluid">

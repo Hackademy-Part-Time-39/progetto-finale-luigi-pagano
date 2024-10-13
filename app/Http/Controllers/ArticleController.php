@@ -73,6 +73,7 @@ class ArticleController extends Controller
     // Metodo per aggiornare un articolo nel database
     public function update(Request $request, $id)
 {
+   
     // Validazione dei dati
     $request->validate([
         'title' => 'required|string|max:255',
@@ -102,19 +103,15 @@ class ArticleController extends Controller
     // Metodo per eliminare un articolo dal database
     public function destroy($id)
     {
+        
         $article = Article::findOrFail($id);
         $article->delete();
+        
     
         // Reindirizza all'elenco degli articoli con un messaggio di successo
         return redirect()->route('article.index')->with('success', 'Articolo eliminato con successo!');
     }
-    public function byCategory($categoryId)
-{
-    $category = Category::findOrFail($categoryId);
-    $articles = Article::where('category_id', $categoryId)->orderBy('created_at', 'desc')->paginate(10);
-
-    return view('article.index', compact('articles', 'category'));
-}
+ 
 public function byUser($userId)
 {
     $user = User::findOrFail($userId);
@@ -131,6 +128,14 @@ public function user()
 {
     return $this->belongsTo(User::class);
 }
+public function byCategory($categoryId)
+{
+    $category = Category::findOrFail($categoryId);
+    $articles = Article::where('category_id', $categoryId)->orderBy('created_at', 'desc')->paginate(10);
+
+    return view('article.index', compact('articles', 'category'));
+}
+
 
 
 
