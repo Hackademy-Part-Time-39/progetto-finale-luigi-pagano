@@ -15,10 +15,19 @@
                 <li class="nav-item">
     <a class="nav-link" href="{{ route('articles.index') }}">Articoli</a>
 </li>
+<li class="nav-item">
+                <a class="nav-link" href="{{ route('careers') }}">Lavora con noi</a>
+            </li>
                 @auth
     <li class="nav-item">
+    <li class="nav-item">
+    <a class="nav-link" href="{{ route('articles.index') }}">Articoli</a>
+</li>
         <a class="nav-link" href="{{ route('articles.create') }}">Crea Articolo</a>
     </li>
+    <li class="nav-item">
+                   
+
 @endauth
 
                 @guest

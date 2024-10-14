@@ -11,7 +11,7 @@
 
     <h1 class="text-center">Elenco degli Articoli</h1>
     <div class="row justify-content-center">
-        <div class="col-md-10">
+         <div class="col-md-10">
             <table class="table table-bordered table-hover">
                 <thead class="table-dark">
                     <tr>
@@ -25,6 +25,8 @@
                 </thead>
                 <tbody>
                     @forelse($articles as $article)
+                    @if($article->user->id == Auth::user()->id)
+
                         <tr>
                             <td>{{ $article->title }}</td>
                             <td>{{ $article->subtitle }}</td>
@@ -58,6 +60,7 @@
                                 @endauth
                             </td>
                         </tr>
+                        @endif
                     @empty
                         <tr>
                             <td colspan="6" class="text-center">Nessun articolo disponibile</td>

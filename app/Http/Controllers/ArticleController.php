@@ -36,7 +36,7 @@ class ArticleController extends Controller
         'title' => 'required|string|max:255',
         'subtitle' => 'required|string|max:255',
         'body' => 'required|string',
-        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        'image' => 'required|nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         'category_id' => 'required|exists:categories,id',
     ]);
 
