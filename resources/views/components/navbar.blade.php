@@ -25,6 +25,9 @@
 </li>
         <a class="nav-link" href="{{ route('articles.create') }}">Crea Articolo</a>
     </li>
+    </li>
+        <a class="nav-link" href="{{ route('admin') }}">Dashboard</a>
+    </li>
     <li class="nav-item">
                    
 

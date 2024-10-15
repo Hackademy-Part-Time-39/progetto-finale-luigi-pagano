@@ -13,25 +13,16 @@ class CareerRequestMail extends Mailable
 
     public $role;
     public $email;
-    public $message;
+    public $msg;
 
-    /**
-     * Create a new message instance.
-     *
-     * @return void
-     */
-    public function __construct($role, $email, $message)
+    public function __construct($role, $email)
     {
         $this->role = $role;
         $this->email = $email;
-        $this->message = $message;
+        
+        
     }
 
-    /**
-     * Build the message.
-     *
-     * @return $this
-     */
     public function build()
     {
         return $this->subject('Nuova Richiesta di Candidatura')

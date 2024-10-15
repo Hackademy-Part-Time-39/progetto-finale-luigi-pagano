@@ -1,5 +1,6 @@
 <?php
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PublicController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\NewsletterController;
@@ -22,6 +23,14 @@ Route::get('/chi-siamo', function () {
 
     Route::get('/careers', [PublicController::class, 'careers'])->name('careers');
     Route::post('/careers/submit', [PublicController::class, 'careersSubmit'])->name('careers.submit');
+    Route::get('/admin', [AdminController::class, 'index'])->name('admin');
+    Route::middleware(['admin'])->group(function (){
+    Route::patch('/admin/{user}/set-admin' ,[AdminController::class, 'setAdmin'])->name('admin.setAdmin');
+    Route::patch('/admin/{user}/set-revisor' ,[AdminController::class, 'setRevisor'])->name('admin.setRevisor');
+    Route::patch('/admin/{user}/set-writer' ,[AdminController::class, 'setWriter'])->name('admin.setWriter');
+
+
+    });
 
 
 
@@ -34,5 +43,11 @@ Route::middleware(['auth'])->group(function () {
    Route::get('/articles/{id}/edit', [ArticleController::class, 'edit'])->name('articles.edit');
     Route::put('/articles/{id}', [ArticleController::class, 'update'])->name('articles.update');
     Route::delete('/articles/{id}', [ArticleController::class, 'destroy'])->name('articles.destroy');
+});
+Route::group(['middleware' => 'checkUserRole', 'prefix' => 'admin'], function () {
+    // Rotta per la dashboard personale dell'admin
+    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+
+    // Altre rotte per l'amministrazione possono essere aggiunte qui
 });
 

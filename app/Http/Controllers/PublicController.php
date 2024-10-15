@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use Illuminate\Http\Request;
 use App\Mail\CareerRequestMail;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\PublicController;
 use Illuminate\Routing\Controllers\Middleware;
@@ -29,47 +30,45 @@ class PublicController extends Controller implements HasMiddleware
             new Middleware ('auth',except: ['welcome']),
         ];
     }
-    public function careersSubmit(Request $request){
-        $request->validate([
-            'role'=>'required',
-            'email'=> 'required|email',
-            'message' => 'required'
-        ]);
-    }
-    public function requestRole(Request $request)
+    public function careersSubmit(Request $request)
 {
-    // Validare la richiesta
+    // Validazione dei dati
     $request->validate([
         'role' => 'required|in:admin,revisor,writer',
-        'message' => 'required|string|max:500',
+        
     ]);
 
-    // Ottenere l'utente autenticato
+    // Ottenere l'utente loggato
     $user = Auth::user();
+    $role = $request->role;
+    $email = $user->email;
+    
+   
 
-    // Impostare il ruolo richiesto a NULL per segnare la richiesta
-    switch ($request->role) {
-        case 'admin':
-            $user->admin = NULL;
+    // Inviare l'email con le informazioni raccolte
+    Mail::to('noreply-hr@theaulabpost.it')->send(new CareerRequestMail($role,$email));
+    switch($role){
+        case 'admin' :
+            $user->is_admin= NULL;
             break;
         case 'revisor':
-            $user->revisor = NULL;
+            $user->is_revisor = NULL;
             break;
         case 'writer':
-            $user->writer = NULL;
-            break;
+            $user->is_writer = NULL;
+            break;       
     }
+    $user->update();
 
-    // Salvare le modifiche
-    $user->save();
-
-    // Inviare l'email
-    Mail::to('admin@example.com')->send(new CareerRequestMail($request->role, $user->email, $request->message));
-
-    // Reindirizzare con un messaggio di successo
-    return redirect()->route('careers')->with('success', 'La tua richiesta è stata inviata con successo. Attendi l\'approvazione.');
+    // Messaggio di successo e reindirizzamento
+    return redirect(route('welcome'))->with('message', 'Richiesta inviata con successo!');
 }
+
     
+
+
+
+
+
+
 }
-
-

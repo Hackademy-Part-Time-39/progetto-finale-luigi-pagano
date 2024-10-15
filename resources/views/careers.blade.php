@@ -11,7 +11,7 @@
     @endif
 
     <!-- Form per richiedere un ruolo -->
-    <form action="{{ route('requestRole') }}" method="POST">
+    <form action="{{ route('careers.submit') }}" method="POST">
         @csrf
         <div class="form-group">
             <label for="role">Ruolo:</label>

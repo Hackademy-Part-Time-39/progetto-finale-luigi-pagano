@@ -40,7 +40,7 @@
         <p><strong>Ruolo Richiesto:</strong> {{ $role }}</p>
         <p><strong>Email:</strong> {{ $email }}</p>
         <p><strong>Messaggio di Presentazione:</strong></p>
-        <p>{{ $message }}</p>
+        <p>{{ $msg }}</p>
 
         <div class="footer">
             <p>Questo messaggio è stato inviato automaticamente. Non rispondere a questa email.</p>
