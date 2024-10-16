@@ -25,7 +25,7 @@ class AdminController extends Controller
       $user->save();
       return redirect(route('admin.dashboard'))->with('msg',"Hai reso $user->name amministratore");
     }
-    public function setReviso(User $user){
+    public function setRevisor(User $user){
       $user->is_revisor = true;
       $user->save();
       return redirect(route('admin.dashboard'))->with('msg',"Hai reso $user->name revisore");
@@ -35,4 +35,12 @@ class AdminController extends Controller
       $user->save();
       return redirect(route('admin.dashboard'))->with('msg',"Hai reso $user->name redattore");
     }
+    public function dashboard() {
+      $adminRequests = User::where('is_admin', NULL)->get();
+      $revisorRequests = User::where('is_revisor', NULL)->get();
+      $writerRequests = User::where('is_writer', NULL)->get();
+    
+      return view('admin.dashboard', compact('adminRequests', 'revisorRequests', 'writerRequests'));
+  }
+  
 }

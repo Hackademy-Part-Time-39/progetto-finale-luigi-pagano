@@ -20,27 +20,27 @@
                 </td>
                 <td>
                     @switch($role)
-                        @case('amministratore')
+                        @case('Amministratore')
                             <form action="{{ route('admin.setAdmin', $user) }}" method="POST" class="d-inline">
                                 @csrf
                                 @method('PATCH')
-                                <button type="submit" class="btn btn-success btn-sm">Attiva come Admin</button>
+                                <button type="submit" class="btn btn-success btn-sm">Attiva</button>
                             </form>
                             @break
 
-                        @case('revisore')
+                        @case('Revisore')
                             <form action="{{ route('admin.setRevisor', $user) }}" method="POST" class="d-inline">
                                 @csrf
                                 @method('PATCH')
-                                <button type="submit" class="btn btn-warning btn-sm">Attiva come Revisore</button>
+                                <button type="submit" class="btn btn-warning btn-sm">Attiva</button>
                             </form>
                             @break
 
-                        @case('redattore')
+                        @case('Redattore')
                             <form action="{{ route('admin.setWriter', $user) }}" method="POST" class="d-inline">
                                 @csrf
                                 @method('PATCH')
-                                <button type="submit" class="btn btn-info btn-sm">Attiva come Redattore</button>
+                                <button type="submit" class="btn btn-info btn-sm">Attiva</button>
                             </form>
                             @break
                     @endswitch

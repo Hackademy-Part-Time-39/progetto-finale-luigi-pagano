@@ -1,25 +1,29 @@
 <x-layout>
 
 
-    <div class="container">
-        <h1>Dashboard Admin</h1>
-        <div>
-            @if(session('msg'))
-            <div class="alert alert-succes">
-                {{session('msg')}}
-
+<div class="container-fluid p-5 bg-secondary-subtle text-center">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <h1 class="display-1">Bentornato, Amministratore {{ Auth::user()->name }}</h1>
             </div>
-            @endif
         </div>
+    </div>
 
+    @if (session('message'))
+        <div class="alert alert-success">
+            {{ session('msg') }}
+        </div>
+    @endif
+        </div>
+       
         <h2>Richieste amministratore</h2>
-        <x-requeststable :roleRequests="$adminRequest" role="Amministratore" />
+        <x-requeststable :roleRequests="$adminRequests" role="Amministratore" />
 
-        <h2>Richieste moderatore</h2>
-        <x-requeststable :roleRequests="$revisorRequest" role="Moderatore" />
+        <h2>Richieste revisore</h2>
+        <x-requeststable :roleRequests="$revisorRequests" role="Revisore" />
 
-        <h2>Richieste gestore</h2>
-        <x-requeststable :roleRequests="$writerRequest" role="Gestore" />
+        <h2>Richieste scrittore</h2>
+        <x-requeststable :roleRequests="$writerRequests" role="Scrittore" />
     </div>
 
 
