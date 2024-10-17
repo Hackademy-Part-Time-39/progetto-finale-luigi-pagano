@@ -28,6 +28,7 @@
                         <!-- Link per riportare l'articolo in revisione -->
                         <form action="{{ route('revisor.undoArticle', $article) }}" method="POST" style="display:inline;">
                             @csrf
+                            @method('PATCH')
                             <button type="submit" class="btn btn-warning">RIporta in revisione</button>
                         </form>
                     @endif

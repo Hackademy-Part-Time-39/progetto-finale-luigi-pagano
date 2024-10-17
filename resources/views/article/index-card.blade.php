@@ -7,7 +7,7 @@
         <div class="col-md-4 mb-4">
             <div class="card h-100">
                 <!-- Immagine dell'articolo -->
-                <img src="{{ $article->image_url ?? '/300x200' }}" class="card-img-top" alt="Immagine Articolo">
+                <img src="{{ asset('storage/' . $article->image) }}" class="card-img-top" alt="Immagine Articolo">
 
                 <div class="card-body">
                     <!-- Titolo dell'articolo -->
