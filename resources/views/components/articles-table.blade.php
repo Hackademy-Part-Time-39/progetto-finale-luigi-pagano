@@ -17,16 +17,11 @@
                 <td>{{ $article->user->name }}</td>
                 <td>{{ $article->created_at->format('d/m/Y') }}</td>
                 <td>
-                    @if(is_null($article->'unrevisioned'))
-                        <span class="badge bg-warning text-dark">In revisione</span>
-                    @elseif(is_null($article->'is_accepted'))
-                        <span class="badge bg-success">Accettato</span>
-                    @elseif(is_null($article->'rejected'))
-                        <span class="badge bg-danger">Rifiutato</span>
-                    @endif
+                    
+                   
                 </td>
                 <td>
-                    @if($article->'is_accepted')
+                    @if(is_null($article->is_accepted))
                         <!-- Link per vedere i dettagli dell'articolo -->
                         <a href="{{ route('article.show', $article) }}" class="btn btn-secondary">Leggi l'articolo</a>
                     @else

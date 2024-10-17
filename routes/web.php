@@ -6,6 +6,7 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\RevisorController;
 use App\Http\Controllers\NewsletterController;
 // Rotte per visualizzare articoli (accessibili a tutti)
+Route::get('/articles/all', [ArticleController::class, 'indexAll'])->name('articles.card');
 Route::get('/articles', [ArticleController::class, 'index'])->name('articles.index');
 Route::get('/articles/{article}', [ArticleController::class, 'show'])->name('articles.show');
 Route::get('/categories/{category}', [ArticleController::class, 'byCategory'])->name('articles.byCategory');
@@ -32,18 +33,24 @@ Route::get('/chi-siamo', function () {
 
     });
     Route::middleware(['revisor'])->group(function (){
-    Route::patch('/revisor/{article}accept' ,[RevisorController::class, 'acceptedArticle'])->name('revisor.acceptedArticle');
-    Route::patch('/revisor/{article}reject' ,[RevisorController::class, 'rejectArticle'])->name('revisor.rejectdArticle');
-    Route::patch('/revisor/{article}undo' ,[RevisorController::class, 'undodArticle'])->name('revisor.undoArticle');
+    Route::patch('/revisor/{article}/accept' ,[RevisorController::class, 'acceptArticle'])->name('revisor.acceptedArticle');
+    Route::patch('/revisor/{article}/reject' ,[RevisorController::class, 'rejectArticle'])->name('revisor.rejectdArticle');
+    Route::patch('/revisor/{article}/undo' ,[RevisorController::class, 'undoArticle'])->name('revisor.undoArticle');
+    Route::get('/revisor/dashboard', [RevisorController::class, 'dashboard'])->name('revisor.dashboard');
 
+});
+Route::middleware('writer')->group(function (){
+    Route::get('/article/create', [ArticleController::class, 'create'])->name('articles.create');
+    Route::get('/article/store', [ArticleController::class, 'store'])->name('articles.store');
 
 });
 
 
 
+
 // Rotte per creare, modificare ed eliminare articoli (solo per utenti autenticati)
 Route::middleware(['auth'])->group(function () {
-    Route::get('/article/create', [ArticleController::class, 'create'])->name('articles.create');
+    
     Route::post('/articles', [ArticleController::class, 'store'])->name('articles.store');
    Route::get('/articles/{id}/edit', [ArticleController::class, 'edit'])->name('articles.edit');
     Route::put('/articles/{id}', [ArticleController::class, 'update'])->name('articles.update');

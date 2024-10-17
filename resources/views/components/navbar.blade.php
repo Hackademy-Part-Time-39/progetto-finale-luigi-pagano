@@ -13,7 +13,7 @@
                 
                 
                 <li class="nav-item">
-    <a class="nav-link" href="{{ route('articles.index') }}">Articoli</a>
+    <a class="nav-link" href="{{ route('articles.card') }}">Tutti gli articoli</a>
 </li>
 <li class="nav-item">
                 <a class="nav-link" href="{{ route('careers') }}">Lavora con noi</a>
@@ -21,13 +21,20 @@
                 @auth
     <li class="nav-item">
     <li class="nav-item">
-    <a class="nav-link" href="{{ route('articles.index') }}">Articoli</a>
+    <a class="nav-link" href="{{ route('articles.index') }}">I miei articoli</a>
 </li>
         <a class="nav-link" href="{{ route('articles.create') }}">Crea Articolo</a>
     </li>
+    @if(Auth::user()->is_admin)
     </li>
-        <a class="nav-link" href="{{ route('admin.dashboard') }}">Dashboard</a>
+        <a class="nav-link" href="{{ route('admin.dashboard') }}">Dashboard Admin</a>
     </li>
+    
+    @elseif(Auth::user()->is_revisor)
+    </li>
+        <a class="nav-link" href="{{ route('revisor.dashboard') }}">Dashboard Revisore</a>
+    </li>
+    @endif
     <li class="nav-item">
                    
 

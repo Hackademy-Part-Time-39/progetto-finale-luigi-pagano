@@ -70,6 +70,9 @@
             </table>
         </div>
     </div>
+    <div class="col-12">
+            <a href="{{ route('articles.index') }}" class="btn btn-primary">Torna agli articoli</a>
+        </div>
 </div>
 
 </x-layout>

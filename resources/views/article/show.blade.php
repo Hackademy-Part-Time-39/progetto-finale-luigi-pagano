@@ -1,9 +1,10 @@
 <x-layout>
 
+@if(Auth::user() && Auth::user()->is_revisor)
 
 <div class="container mt-5">
     <div class="row">
-        <div class="col-12">
+        <div class="col-12 d-flex justify-content-evenly">
             <h1>{{ $article->title }}</h1>
             <p><strong>Categoria:</strong> {{ $article->category->name }}</p>
             <p><strong>Autore:</strong> {{ $article->user->name }}</p>
@@ -34,6 +35,20 @@
             <a href="{{ route('article.index') }}" class="btn btn-primary">Torna agli articoli</a>
         </div>
     </div>
+    <form action="{{route('revisor.acceptedArticle', $article)}}" method="POST">
+        @csrf
+        @method('PATCH')
+        <button type="submit" class="btn btn-success">Accetta l'articolo</button>
+ 
+    </form>
+    <form action="{{route('revisor.rejectdArticle', $article)}}" method="POST">
+        @csrf
+        @method('PATCH')
+        <button type="submit" class="btn btn-danger">Rifiuta l'articolo</button>
+ 
+    </form>
+
+    @endif
 </div>
 
 

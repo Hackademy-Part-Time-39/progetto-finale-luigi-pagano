@@ -16,7 +16,7 @@
     <!-- Articoli da revisionare -->
     <div class="container">
         <h2>Articoli da revisionare</h2>
-        <x-articles-table :articles="$unrevisionedArticles"/>
+        <x-articles-table :articles="$unrevionedArticles"/>
     </div>
 
     <!-- Articoli accettati -->

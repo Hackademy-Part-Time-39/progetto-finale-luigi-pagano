@@ -5,7 +5,7 @@
     <div class="d-flex flex-column justify-content-center align-items-center h-100">
         <h1 class="display-4">Come un Blog ti cambia la vita</h1>
         <p class="lead"></p>
-        <a href="{{ route('article.index') }}" class="btn btn-light btn-lg">Leggi i nostri articoli</a>
+        <a href="{{ route('articles.card') }}" class="btn btn-light btn-lg">Leggi i nostri articoli</a>
     </div>
 </div>
 

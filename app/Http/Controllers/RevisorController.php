@@ -12,23 +12,23 @@ class RevisorController extends Controller
         $acceptedArticles = Article::where('is_accepted', true)->get();
         $rejectedArticles = Article::where('is_accepted', false)->get();
       
-        return view('revisor.dashboard', compact('unrevionedArticle', 'acceptedArticles', 'rejectedArticles'));
+        return view('revisor.dashboard', compact('unrevionedArticles', 'acceptedArticles', 'rejectedArticles'));
     }
 
 public function acceptArticle(Article $article){
-$article->is_accept = true; 
-$article-save();
-return redirect(route('revisor.dashboard'))-with( 'message', 'Articolo pubblicato'); 
+$article->is_accepted = true; 
+$article->save();
+return redirect(route('revisor.dashboard'))->with( 'message', 'Articolo pubblicato'); 
 }
 public function rejectArticle(Article $article){
-    $article->is_accept = false; 
-    $article-save();
-    return redirect(route('revisor.dashboard'))-with( 'message', 'Articolo rifiutato'); 
+    $article->is_accepted = false; 
+    $article->save();
+    return redirect(route('revisor.dashboard'))->with( 'message', 'Articolo rifiutato'); 
     }
     public function undoArticle(Article $article){
-        $article->is_accept = NULL; 
-        $article-save();
-        return redirect(route('revisor.dashboard'))-with( 'message', 'Articolo rimandato in revisione'); 
+        $article->is_accepted = NULL; 
+        $article->save();
+        return redirect(route('revisor.dashboard'))->with( 'message', 'Articolo rimandato in revisione'); 
         }
 
 }

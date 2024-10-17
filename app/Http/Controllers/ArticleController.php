@@ -14,7 +14,8 @@ class ArticleController extends Controller
         public function index()
         {
             // Prende tutti gli articoli ordinati dal più recente al più vecchio
-            $articles = Article::orderBy('created_at', 'desc')->paginate(6); // Utilizza la paginazione, 6 articoli per pagina
+            $articles =         $recentArticles = Article::where('is_accepted', true)->orderBy('created_at', 'desc')->take(4)->get();
+            // Utilizza la paginazione, 6 articoli per pagina
     
             // Ritorna la vista 'article.index' passando gli articoli
             return view('article.index', compact('articles'));
@@ -60,6 +61,13 @@ class ArticleController extends Controller
     {
         return view('article.show', compact('article'));
     }
+    public function indexAll()
+    {
+        $articles = Article::where('is_accepted', true)->orderBy('created_at', 'desc')->take(6)->get();
+
+        return view('article.index-card', compact('articles'));
+    }
+    
 
 
     // Metodo per mostrare il form di modifica di un articolo
@@ -115,7 +123,8 @@ class ArticleController extends Controller
 public function byUser($userId)
 {
     $user = User::findOrFail($userId);
-    $articles = Article::where('user_id', $userId)->orderBy('created_at', 'desc')->paginate(10);
+    $articles = Article::where('is_accepted', true)->orderBy('created_at', 'desc')->take(10)->get();
+    ;
 
     return view('article.index', compact('articles', 'user'));
 }
@@ -131,7 +140,8 @@ public function user()
 public function byCategory($categoryId)
 {
     $category = Category::findOrFail($categoryId);
-    $articles = Article::where('category_id', $categoryId)->orderBy('created_at', 'desc')->paginate(10);
+    $articles =Article::where('is_accepted', true)->orderBy('created_at', 'desc')->take(6)->get();
+    ;
 
     return view('article.index', compact('articles', 'category'));
 }
