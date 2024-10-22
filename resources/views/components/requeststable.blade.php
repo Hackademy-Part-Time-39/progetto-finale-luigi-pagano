@@ -1,4 +1,4 @@
-<table class="table table-striped table-hover">
+<table class="table table-striped table-hover rounded shadow">
     <thead class="table-light">
         <tr>
             <th scope="col">#</th>
@@ -16,7 +16,7 @@
                 <td>{{ $user->email }}</td>
                 <td>
                     {{-- Mostra il ruolo richiesto --}}
-                    {{ ucfirst($role) }}
+                    <span class="badge bg-secondary">{{ ucfirst($role) }}</span>
                 </td>
                 <td>
                     @switch($role)
@@ -24,7 +24,7 @@
                             <form action="{{ route('admin.setAdmin', $user) }}" method="POST" class="d-inline">
                                 @csrf
                                 @method('PATCH')
-                                <button type="submit" class="btn btn-success btn-sm">Attiva</button>
+                                <button type="submit" class="btn btn-success btn-sm rounded-pill">Attiva</button>
                             </form>
                             @break
 
@@ -32,7 +32,7 @@
                             <form action="{{ route('admin.setRevisor', $user) }}" method="POST" class="d-inline">
                                 @csrf
                                 @method('PATCH')
-                                <button type="submit" class="btn btn-warning btn-sm">Attiva</button>
+                                <button type="submit" class="btn btn-warning btn-sm rounded-pill">Attiva</button>
                             </form>
                             @break
 
@@ -40,7 +40,7 @@
                             <form action="{{ route('admin.setWriter', $user) }}" method="POST" class="d-inline">
                                 @csrf
                                 @method('PATCH')
-                                <button type="submit" class="btn btn-info btn-sm">Attiva</button>
+                                <button type="submit" class="btn btn-info btn-sm rounded-pill">Attiva</button>
                             </form>
                             @break
                     @endswitch

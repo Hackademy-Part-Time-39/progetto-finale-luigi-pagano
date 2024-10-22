@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tag;
 use App\Models\User;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AdminController;
 
@@ -39,8 +41,34 @@ class AdminController extends Controller
       $adminRequests = User::where('is_admin', NULL)->get();
       $revisorRequests = User::where('is_revisor', NULL)->get();
       $writerRequests = User::where('is_writer', NULL)->get();
+      $tags = Tag::all();
     
-      return view('admin.dashboard', compact('adminRequests', 'revisorRequests', 'writerRequests'));
+      return view('admin.dashboard', compact('adminRequests', 'revisorRequests', 'writerRequests' , 'tags'));
+  }
+  public function editTag(Request $request, Tag $tag){
+    $request->validate([
+      'name'=>'required|unique:tag',
+    ]);
+    $tag->update([
+      'name'=> strtolower($request->name),
+    ]);
+    return redirect()->back()->with('message', 'Tag aggiornato correttamente');
+  }
+  public function deleteTag(Tag $tag){
+   foreach ($tag->articles as $article){
+    $article->tags()->detach($tag);
+   }
+    $tag->delete();
+    return redirect()->back()->with('message', 'Tag eliminato correttamente');
+  }
+  public function editCategory(Request $request, Category $category){
+    $request->validate([
+      'name'=>'required|unique:categories',
+    ]);
+    $category->update([
+      'name'=> strtolower($request->name),
+    ]);
+    return redirect()->back()->with('message', 'Categoria aggiornata correttamente');
   }
   
 }

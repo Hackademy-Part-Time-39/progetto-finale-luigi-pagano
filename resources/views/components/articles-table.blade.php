@@ -22,10 +22,10 @@
                 </td>
                 <td>
                     @if(is_null($article->is_accepted))
-                        <!-- Link per vedere i dettagli dell'articolo -->
+                        
                         <a href="{{ route('article.show', $article) }}" class="btn btn-secondary">Leggi l'articolo</a>
                     @else
-                        <!-- Link per riportare l'articolo in revisione -->
+                        
                         <form action="{{ route('revisor.undoArticle', $article) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('PATCH')

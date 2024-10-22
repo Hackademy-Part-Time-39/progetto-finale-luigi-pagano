@@ -30,6 +30,9 @@ Route::get('/chi-siamo', function () {
     Route::patch('/admin/{user}/set-revisor' ,[AdminController::class, 'setRevisor'])->name('admin.setRevisor');
     Route::patch('/admin/{user}/set-writer' ,[AdminController::class, 'setWriter'])->name('admin.setWriter');
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+    Route::put('/admin/edit/tag/{tag}', [AdminController::class, 'editTag'])->name('admin.editTag');
+    Route::delete('/admin/delete/tag/{tag}', [AdminController::class, 'deleteTag'])->name('admin.deleteTag');
+    Route::put('/admin/edit/category/{category}', [AdminController::class, 'editCategory'])->name('admin.editCategory');
 
     });
     Route::middleware(['revisor'])->group(function (){
@@ -44,6 +47,10 @@ Route::middleware('writer')->group(function (){
     Route::get('/article/store', [ArticleController::class, 'store'])->name('articles.store');
 
 });
+Route::get('/article/search' , [ArticleController::class, 'articleSearch'])->name('article.search');
+
+// Route per visualizzare una categoria specifica non so se giusta
+Route::get('/categories/{id}', [ArticleController::class, 'show'])->name('category.show');
 
 
 

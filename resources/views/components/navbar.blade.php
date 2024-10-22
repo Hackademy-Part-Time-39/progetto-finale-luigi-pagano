@@ -1,66 +1,90 @@
-<!-- resources/views/components/navbar.blade.php -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm py-3">
     <div class="container-fluid">
-        <a class="navbar-brand" href="/">The Aulab Post</a>
+        <!-- Brand -->
+        <header>
+    <div class="container">
+        <a href="{{ url('/') }}">
+            <img src="{{ asset('/logo/logo.png') }}" alt="Logo del sito" style="width: 80px;">
+        </a>
+    </div>
+</header>
+
+         <img src="{{ asset('images/logo/logo.png') }}" alt="" style="width: 150px;>
+        <a class="navbar-brand" href="/" style="font-weight: bold; color: #061e4d; font-size: 1.5rem;">Ma che Blo(g)ntà</a>
+
+        <!--  Menu for Mobile -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
+                <!-- Home -->
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/">Home</a>
+                    <a class="nav-link active" aria-current="page" href="/" style="font-weight: 500;">Home</a>
+                </li>
+
+                <!-- Tutti gli articoli -->
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('articles.card') }}" style="font-weight: 500;">Scopri tutte le ricette</a>
                 </li>
                 
-                
-                <li class="nav-item">
-    <a class="nav-link" href="{{ route('articles.card') }}">Tutti gli articoli</a>
-</li>
-<li class="nav-item">
-                <a class="nav-link" href="{{ route('careers') }}">Lavora con noi</a>
-            </li>
-                @auth
-    <li class="nav-item">
-    <li class="nav-item">
-    <a class="nav-link" href="{{ route('articles.index') }}">I miei articoli</a>
-</li>
-        <a class="nav-link" href="{{ route('articles.create') }}">Crea Articolo</a>
-    </li>
-    @if(Auth::user()->is_admin)
-    </li>
-        <a class="nav-link" href="{{ route('admin.dashboard') }}">Dashboard Admin</a>
-    </li>
-    
-    @elseif(Auth::user()->is_revisor)
-    </li>
-        <a class="nav-link" href="{{ route('revisor.dashboard') }}">Dashboard Revisore</a>
-    </li>
-    @endif
-    <li class="nav-item">
-                   
 
-@endauth
+                <!-- Lavora con noi -->
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('careers') }}" style="font-weight: 500;">Lavora con noi</a>
+                </li>
+
+                @auth
+                    <!-- I miei articoli -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('articles.index') }}" style="font-weight: 500;">Le Mie Ricette</a>
+                    </li>
+
+                    <!-- Crea articolo -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('articles.create') }}" style="font-weight: 500;">Pubblica Ricetta</a>
+                    </li>
+
+                    <!-- Admin/Revisor Dashboard -->
+                    @if(Auth::user()->is_admin)
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('admin.dashboard') }}" style="font-weight: 500;">Dashboard Admin</a>
+                        </li>
+                    @elseif(Auth::user()->is_revisor)
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('revisor.dashboard') }}" style="font-weight: 500;">Dashboard Revisore</a>
+                        </li>
+                    @endif
+
+                    <!-- User Greeting and Logout -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" style="font-weight: 500;">Ciao, {{ Auth::user()->name }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('logout') }}" style="font-weight: 500;" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                    </li>
+                @endauth
 
                 @guest
+                    <!-- Login -->
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login') }}">Login</a>
+                        <a class="nav-link" href="{{ route('login') }}" style="font-weight: 500;">Login</a>
                     </li>
+                    
+                    <!-- Register -->
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('register') }}">Registrati</a>
+                        <a class="nav-link" href="{{ route('register') }}" style="font-weight: 500;">Registrati</a>
                     </li>
                 @endguest
-                @auth
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Ciao, {{ Auth::user()->name }}</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
-                    </li>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                        @csrf
-                    </form>
-                    
-                @endauth
-                
+                <form action="{{route('article.search')}}" method="GET" class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" name="query" placeholder="Cerca tra gli articoli..." aria-label="Search">
+                    <button class="btn btn-outline-secondary" type="submit">Cerca</button>
+                </form>
+
             </ul>
         </div>
     </div>

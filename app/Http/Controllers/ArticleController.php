@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tag;
 use App\Models\Article;
-use Illuminate\Http\Request;
 use App\Models\Category;
+use Illuminate\Http\Request;
 
 class ArticleController extends Controller
 {
@@ -39,7 +40,28 @@ class ArticleController extends Controller
         'body' => 'required|string',
         'image' => 'required|nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         'category_id' => 'required|exists:categories,id',
+        'tags'=>'required|max:255'
     ]);
+    $article = Article::create([
+        'title'=>$request->title,
+        'subtitle'=>$request->subtitle,
+        'body'=>$request->body,
+        'image'=>$request->file('image')->store('public/images'),
+        'category_id'=>$request->category,
+        'user_id'=>Auth::user()->id,
+    ]);
+    $tags =explode(',' , $request->tags);
+    foreach($tags as $i=>$tag){
+        $tags[$i]= trim($tag);
+    }
+    foreach($tags as $tag){
+        $newTag = Tag::updateOrCreate([
+            'name'=> strtolower($tag)
+        ]);
+        $article->tags()->attach($newTag);
+    }
+    return redirect(route('welcome'))->with('message', 'Ricetta inviata con successo');
+
 
     // Creazione e salvataggio dell'articolo
     $article = new Article($request->all());
@@ -50,7 +72,7 @@ class ArticleController extends Controller
     $article->save();
 
     // Reindirizzamento con un messaggio di successo
-    return redirect()->route('articles.index')->with('success', 'Articolo correttamente salvato!');
+    return redirect()->route('articles.index')->with('success', 'Ricetta correttamente salvata!');
 }
 
 
@@ -104,7 +126,7 @@ class ArticleController extends Controller
     }
 
     // Reindirizza all'elenco degli articoli con un messaggio di successo
-    return redirect()->route('article.index')->with('success', 'Articolo modificato con successo!');
+    return redirect()->route('article.index')->with('success', 'Ricetta modificata con successo!');
 
     }
 
@@ -117,14 +139,14 @@ class ArticleController extends Controller
         
     
         // Reindirizza all'elenco degli articoli con un messaggio di successo
-        return redirect()->route('article.index')->with('success', 'Articolo eliminato con successo!');
+        return redirect()->route('article.index')->with('success', 'Ricetta eliminata con successo!');
     }
  
 public function byUser($userId)
 {
     $user = User::findOrFail($userId);
     $articles = Article::where('is_accepted', true)->orderBy('created_at', 'desc')->take(10)->get();
-    ;
+    
 
     return view('article.index', compact('articles', 'user'));
 }
@@ -145,6 +167,19 @@ public function byCategory($categoryId)
 
     return view('article.index', compact('articles', 'category'));
 }
+// funzione per cercare articoli(ricette)
+public function articleSearch(Request $request) {
+    $query=$request->input('query');
+    $articles=Article::search($query)->where('is_accepted', true)->orderBy('created_at', 'desc')->get();
+    return view('article.search-index' , compact('articles', 'query'));
+}
+public static function middleware () {
+    return [
+        new Middleware('auth' , except:['index', 'show' , 'byCategory' , 'byUser', 'articleSearch']),
+
+    ];
+}
+
 
 
 

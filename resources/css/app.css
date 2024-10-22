@@ -36,7 +36,7 @@
 }
 
 .btn-outline-info:hover {
-    background-color: #5dade2;
+    background-color: #021724;
     color: white;
 }
 body {
@@ -45,12 +45,7 @@ body {
      
 }
 
-.hero-section {
-    background-color: #eaeaea;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
+
 
 .newsletter-section {
     background-color: #fdf5e6;
@@ -76,7 +71,7 @@ footer a:hover {
 
 
 h1, h2, h3, h4, h5, h6 {
-    color: #2c3e50;
+    color: #061e4d;
 }
 
 /* Pulsanti */
@@ -92,6 +87,7 @@ h1, h2, h3, h4, h5, h6 {
     border-color: #2c3e50;
 }
 
+
 @media (max-width: 768px) {
     .card {
         flex: 1 1 calc(50% - 20px); /* Due card per riga su tablet */
@@ -104,4 +100,69 @@ h1, h2, h3, h4, h5, h6 {
         flex: 1 1 calc(100% - 20px); /* Una card per riga su mobile */
         min-height: 300px;
     }
+
+}
+.tablerevisor {
+    color: black;
+}
+.titletablerevisor{
+    color: #2c3e50;
+    font: bold;
+}
+
+.form-label {
+    font-weight: bold;
+    color: #343a40; /* Colore del testo */
+}
+.btn-warning {
+    background-color: #ffc107; /* Colore di sfondo */
+    border-color: #ffc107; /* Colore del bordo */
+}
+.btn-warning:hover {
+    background-color: #e0a800; /* Colore di sfondo al passaggio del mouse */
+    border-color: #d39e00; /* Colore del bordo al passaggio del mouse */
+}
+.text-danger {
+    font-weight: 600; /* Rende il messaggio di errore più evidente */
+}
+
+.register-container {
+    background-color: #ffffff; /* Colore di sfondo del modulo */
+    border-radius: 15px; /* Angoli arrotondati */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Ombra per un effetto di profondità */
+    padding: 30px; /* Spaziatura interna */
+}
+.register-header {
+    color: #007bff; /* Colore del titolo */
+    font-weight: bold; /* Testo in grassetto */
+}
+.btn-primary {
+    background-color: #007bff; /* Colore primario */
+    border-color: #007bff; /* Colore del bordo */
+}
+.btn-primary:hover {
+    background-color: #0056b3; /* Colore al passaggio del mouse */
+    border-color: #0056b3; /* Colore del bordo al passaggio del mouse */
+}
+.text-danger {
+    font-size: 0.9em; /* Dimensione font per messaggi di errore */
+}
+
+.login-container {
+    background-color: #ffffff; /* Colore di sfondo del modulo */
+    border-radius: 15px; /* Angoli arrotondati */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Ombra per un effetto di profondità */
+    padding: 30px; /* Spaziatura interna */
+}
+.login-header {
+    color: #007bff; /* Colore del titolo */
+    font-weight: bold; /* Testo in grassetto */
+}
+.btn-primary {
+    background-color: #007bff; /* Colore primario */
+    border-color: #007bff; /* Colore del bordo */
+}
+.btn-primary:hover {
+    background-color: #0056b3; /* Colore al passaggio del mouse */
+    border-color: #0056b3; /* Colore del bordo al passaggio del mouse */
 }

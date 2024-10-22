@@ -22,11 +22,11 @@ class CreateCategoriesTable extends Migration
 
         // Popolare la tabella categories con alcune categorie predefinite
         $defaultCategories = [
-            ['name' => 'Tecnologia', 'description' => 'Articoli sulla tecnologia'],
-            ['name' => 'Salute', 'description' => 'Articoli sulla salute e benessere'],
-            ['name' => 'Sport', 'description' => 'Notizie sportive e aggiornamenti'],
-            ['name' => 'Economia', 'description' => 'Tendenze economiche e finanza'],
-            ['name' => 'Cultura', 'description' => 'Argomenti culturali e attualità']
+            ['name' => 'Primi Piatti', 'description' => 'Ricette di primi piatti'],
+            ['name' => 'Secondi Piatti', 'description' => 'Ricette di secondi piatti'],
+            ['name' => 'Contorni', 'description' => 'Ricette di contorni'],
+            ['name' => 'Dessert', 'description' => 'Ricette di dessert'],
+            ['name' => 'Cucina Vegana', 'description' => 'Ricette di cucina vegana']
         ];
 
         // Inserisci le categorie predefinite nel database
