@@ -17,15 +17,15 @@
                 <td>{{ $article->user->name }}</td>
                 <td>{{ $article->created_at->format('d/m/Y') }}</td>
                 <td>
-                    
-                   
+
+
                 </td>
                 <td>
                     @if(is_null($article->is_accepted))
-                        
+
                         <a href="{{ route('article.show', $article) }}" class="btn btn-secondary">Leggi l'articolo</a>
                     @else
-                        
+
                         <form action="{{ route('revisor.undoArticle', $article) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('PATCH')
@@ -37,4 +37,3 @@
         @endforeach
     </tbody>
 </table>
-

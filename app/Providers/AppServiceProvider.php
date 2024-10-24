@@ -1,5 +1,5 @@
 <?php
-
+namespace App\Providers;
 use App\Models\Tag;
 use App\Models\Category;
 use Illuminate\Support\Facades\View;
@@ -21,12 +21,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        if (Schema::hasTable('categories')){
+        if (Schema::hasTable('categories')) {
             $categories = Category::all();
             View::share(['categories' => $categories]);
         }
 
-        if (Schema::hasTable('tags')){
+        if (Schema::hasTable('tags')) {
             $tags = Tag::all();
             View::share(['tags' => $tags]);
         }

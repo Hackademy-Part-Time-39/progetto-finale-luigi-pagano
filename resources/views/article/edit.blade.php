@@ -12,7 +12,8 @@
                     <!-- Campo per il titolo -->
                     <div class="mb-3">
                         <label for="title" class="form-label">Titolo</label>
-                        <input type="text" name="title" id="title" class="form-control" value="{{ old('title', $article->title) }}" required>
+                        <input type="text" name="title" id="title" class="form-control"
+                            value="{{ old('title', $article->title) }}" required>
                         @error('title')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
@@ -21,7 +22,8 @@
                     <!-- Campo per il sottotitolo -->
                     <div class="mb-3">
                         <label for="subtitle" class="form-label">Sottotitolo</label>
-                        <input type="text" name="subtitle" id="subtitle" class="form-control" value="{{ old('subtitle', $article->subtitle) }}" required>
+                        <input type="text" name="subtitle" id="subtitle" class="form-control"
+                            value="{{ old('subtitle', $article->subtitle) }}" required>
                         @error('subtitle')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
@@ -54,7 +56,8 @@
                     <!-- Campo per il corpo dell'Articolo -->
                     <div class="mb-3">
                         <label for="body" class="form-label">Corpo dell'Articolo</label>
-                        <textarea name="body" id="body" class="form-control" rows="5" required>{{ old('body', $article->body) }}</textarea>
+                        <textarea name="body" id="body" class="form-control" rows="5"
+                            required>{{ old('body', $article->body) }}</textarea>
                         @error('body')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
@@ -69,6 +72,6 @@
         </div>
     </div>
 
-  
+
 
 </x-layout>

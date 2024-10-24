@@ -6,7 +6,8 @@ use App\Models\Tag;
 use App\Models\User;
 use App\Models\Category;
 use Illuminate\Http\Request;
-use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Controller;
+
 
 class AdminController extends Controller
 {
@@ -70,5 +71,15 @@ class AdminController extends Controller
     ]);
     return redirect()->back()->with('message', 'Categoria aggiornata correttamente');
   }
+  public function deleteCategory(Category $category) {
+    $category->delete();
+    return redirect()->back()->with('message' , 'Categoria eliminata con successo');
   
+  }
+  public function storeCategory(Request $request) {
+    Category::create([
+      'name'=>strtolower($request->name      ),
+    ]);
+    return redirect()->back()->with('message','Categoria inserita correttamente');
+  }
 }

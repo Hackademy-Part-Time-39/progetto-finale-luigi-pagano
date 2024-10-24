@@ -1,3 +1,4 @@
+use Illuminate\Support\Facades\Auth;
 <x-layout>
     <div class="container mt-5">
         <!-- Messaggi di successo -->
@@ -32,24 +33,34 @@
                                         <td>{{ $article->category ? $article->category->name : 'N/A' }}</td>
                                         <td>{{ $article->created_at->format('d/m/Y') }}</td>
                                         <td>
-                                            <a href="{{ route('article.show', $article) }}" class="btn btn-primary btn-sm">Leggi</a>
-                                            <a href="{{ route('article.byCategory', $article->category) }}" class="badge bg-secondary">
+                                            <a href="{{ route('article.show', $article) }}"
+                                                class="btn btn-primary btn-sm">Leggi</a>
+                                            @if ($article->category)
+                                                <a href="{{ route('article.byCategory', $article->category) }}"
+                                                    class=" badge bg-secondary text-capitalize text-muted">{{ $article->category->name }}>
+                                            @else
+                                                <p class="small text-muted">Nessuna categoria</p>
+                                            @endif
                                                 {{ $article->category->name }}
                                             </a>
                                             <p class="mb-1">
                                                 Pubblicato da:
-                                                <a href="{{ route('article.byUser', $article->user) }}" class="text-decoration-none">
+                                                <a href="{{ route('article.byUser', $article->user) }}"
+                                                    class="text-decoration-none">
                                                     {{ $article->user->name }}
                                                 </a>
                                             </p>
 
                                             @auth
-                                                <a href="{{ route('articles.edit', $article->id) }}" class="btn btn-warning btn-sm">Modifica</a>
+                                                <a href="{{ route('articles.edit', $article->id) }}"
+                                                    class="btn btn-warning btn-sm">Modifica</a>
 
-                                                <form action="{{ route('articles.destroy', $article->id) }}" method="POST" style="display:inline;">
+                                                <form action="{{ route('articles.destroy', $article->id) }}" method="POST"
+                                                    style="display:inline;">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Sei sicuro di voler eliminare questo articolo?')">Elimina</button>
+                                                    <button type="submit" class="btn btn-danger btn-sm"
+                                                        onclick="return confirm('Sei sicuro di voler eliminare questo articolo?')">Elimina</button>
                                                 </form>
                                             @endauth
                                         </td>
@@ -71,6 +82,6 @@
     </div>
 
     <style>
-        
+
     </style>
 </x-layout>

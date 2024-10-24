@@ -10,7 +10,8 @@
                     <!-- Campo per il titolo -->
                     <div class="mb-3">
                         <label for="title" class="form-label">Titolo</label>
-                        <input type="text" name="title" id="title" class="form-control" value="{{ old('title') }}" required autofocus placeholder="Inserisci il titolo dell'articolo">
+                        <input type="text" name="title" id="title" class="form-control" value="{{ old('title') }}"
+                            required autofocus placeholder="Inserisci il titolo dell'articolo">
                         @error('title')
                             <div class="text-danger mt-1">⚠️ {{ $message }}</div>
                         @enderror
@@ -19,7 +20,8 @@
                     <!-- Campo per il sottotitolo -->
                     <div class="mb-3">
                         <label for="subtitle" class="form-label">Sottotitolo</label>
-                        <input type="text" name="subtitle" id="subtitle" class="form-control" value="{{ old('subtitle') }}" required placeholder="Inserisci il sottotitolo dell'articolo">
+                        <input type="text" name="subtitle" id="subtitle" class="form-control"
+                            value="{{ old('subtitle') }}" required placeholder="Inserisci il sottotitolo dell'articolo">
                         @error('subtitle')
                             <div class="text-danger mt-1">⚠️ {{ $message }}</div>
                         @enderror
@@ -40,9 +42,9 @@
                         <select name="category_id" id="category_id" class="form-select" required>
                             <option value="" disabled selected>Seleziona una categoria</option>
                             @foreach($categories as $category)
-                            <option value="{{ $category->id }}">
-                                     {{ $category->name }}
-                            </option>
+                                <option value="{{ $category->id }}">
+                                    {{ $category->name }}
+                                </option>
 
 
                             @endforeach
@@ -55,7 +57,7 @@
                     <input type="text" name="tags" class="form-control" id="tags" value="{{old('tags')}}">
                     <span class="small text-muted fst-italic">Dividi ogni tag con una virgola</span>
                     @error('tags')
-                    <span class="text-danger">{{$message}}</span>
+                        <span class="text-danger">{{$message}}</span>
                     @enderror
                     <div>
 
@@ -64,7 +66,8 @@
                     <!-- Campo per il corpo dell'Articolo -->
                     <div class="mb-3">
                         <label for="body" class="form-label">Corpo dell'Articolo</label>
-                        <textarea name="body" id="body" class="form-control" rows="5" required placeholder="Scrivi il corpo dell'articolo...">{{ old('body') }}</textarea>
+                        <textarea name="body" id="body" class="form-control" rows="5" required
+                            placeholder="Scrivi il corpo dell'articolo...">{{ old('body') }}</textarea>
                         @error('body')
                             <div class="text-danger mt-1">⚠️ {{ $message }}</div>
                         @enderror

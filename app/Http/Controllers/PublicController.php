@@ -5,13 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use Illuminate\Http\Request;
 use App\Mail\CareerRequestMail;
+use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
-use App\Http\Controllers\PublicController;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Routing\Controllers\HasMiddleware;
 
-class PublicController extends Controller implements HasMiddleware
+class PublicController extends Controller 
 {
     public function welcome()
     {
@@ -24,12 +24,7 @@ class PublicController extends Controller implements HasMiddleware
     public function careers (){
         return view ('careers');
     }
-    public static function middleware()
-    {
-        return [
-            new Middleware ('auth',except: ['welcome']),
-        ];
-    }
+    
     public function careersSubmit(Request $request)
 {
     // Validazione dei dati
