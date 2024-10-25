@@ -8,7 +8,7 @@ use App\Http\Controllers\RevisorController;
 use App\Http\Controllers\NewsletterController;
 // Rotte per visualizzare articoli (accessibili a tutti)
 Route::get('/articles/all', [ArticleController::class, 'indexAll'])->name('articles.card');
-Route::get('/articles',  [ArticleController::class, 'index'])->name('articles.index');
+Route::get('/articles',  [ArticleController::class, 'index'])->middleware('auth')->name('articles.index');
 Route::get('/articles/{article}', [ArticleController::class, 'show'])->name('articles.show');
 Route::get('/categories/{category}', [ArticleController::class, 'byCategory'])->name('articles.byCategory');
 Route::get('/users/{user}', [ArticleController::class, 'byUser'])->name('articles.byUser');
@@ -34,7 +34,7 @@ Route::middleware(['admin'])->group(function () {
     Route::put('/admin/edit/tag/{tag}', [AdminController::class, 'editTag'])->name('admin.editTag');
     Route::delete('/admin/delete/tag/{tag}', [AdminController::class, 'deleteTag'])->name('admin.deleteTag');
     Route::put('/admin/edit/category/{category}', [AdminController::class, 'editCategory'])->name('admin.editCategory');
-    Route::put('/admin/delete/category/{category}', [AdminController::class, 'deleteCategory'])->name('admin.deleteCategory');
+    Route::delete('/admin/delete/category/{category}', [AdminController::class, 'deleteCategory'])->name('admin.deleteCategory');
     Route::post('/admin/category/store', [AdminController::class, 'storeCategory'])->name('admin.storeCategory');
 
 });
@@ -67,5 +67,6 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/articles/{id}', [ArticleController::class, 'destroy'])->name('articles.destroy');
     Route::get('/article/create', [ArticleController::class, 'create'])->name('articles.create');
     Route::get('/article/store', [ArticleController::class, 'store'])->name('articles.store');
+    
 });
 

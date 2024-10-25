@@ -48,7 +48,7 @@ class AdminController extends Controller
   }
   public function editTag(Request $request, Tag $tag){
     $request->validate([
-      'name'=>'required|unique:tag',
+      'name'=>'required|unique:tags',
     ]);
     $tag->update([
       'name'=> strtolower($request->name),

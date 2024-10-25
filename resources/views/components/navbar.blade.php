@@ -35,12 +35,14 @@
                 </li>
 
 
-                <!-- Lavora con noi -->
-                <li class="nav-item">
+             
+
+                @auth
+                   <!-- Lavora con noi -->
+                   <li class="nav-item">
                     <a class="nav-link" href="{{ route('careers') }}" style="font-weight: 500;">Lavora con noi</a>
                 </li>
 
-                @auth
                     <!-- I miei articoli -->
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('articles.index') }}" style="font-weight: 500;">Le Mie
@@ -85,7 +87,7 @@
                         <a class="nav-link" href="{{ route('login') }}" style="font-weight: 500;">Login</a>
                     </li>
 
-                    <!-- Register -->
+                    <!-- registrati -->
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('register') }}" style="font-weight: 500;">Registrati</a>
                     </li>

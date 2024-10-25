@@ -8,8 +8,7 @@ use App\Mail\CareerRequestMail;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Routing\Controllers\Middleware;
-use Illuminate\Routing\Controllers\HasMiddleware;
+
 
 class PublicController extends Controller 
 {

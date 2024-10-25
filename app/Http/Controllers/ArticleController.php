@@ -51,7 +51,7 @@ class ArticleController extends Controller
         'subtitle'=>$request->subtitle,
         'body'=>$request->body,
         'image'=>$request->file('image')->store('public/images'),
-        'category_id'=>$request->category,
+        'category_id'=>$request->category_id,
         'user_id'=>Auth::user()->id,
     ]);
     $tags =explode(',' , $request->tags);
@@ -67,16 +67,7 @@ class ArticleController extends Controller
     return redirect(route('welcome'))->with('message', 'Ricetta inviata con successo');
 
 
-    // Creazione e salvataggio dell'articolo
-    $article = new Article($request->all());
-    if ($request->hasFile('image')) {
-        $article->image = $request->file('image')->store('images','public');
-    }
-    $article->user_id = auth()->id(); // Associa l'articolo all'utente autenticato
-    $article->save();
 
-    // Reindirizzamento con un messaggio di successo
-    return redirect()->route('articles.index')->with('success', 'Ricetta correttamente salvata!');
 }
 
 
@@ -154,15 +145,7 @@ public function byUser($userId)
 
     return view('article.index', compact('articles', 'user'));
 }
-public function category()
-{
-    return $this->belongsTo(Category::class);
-}
 
-public function user()
-{
-    return $this->belongsTo(User::class);
-}
 public function byCategory($categoryId)
 {
     $category = Category::findOrFail($categoryId);

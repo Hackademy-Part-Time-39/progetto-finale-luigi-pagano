@@ -70,9 +70,7 @@
     </footer>
 
 
-    <script>
-        AOS.init();
-    </script>
+   
 
 
 

@@ -32,9 +32,7 @@
                     <p class="text-justify">{{ $article->body }}</p>
                 </div>
 
-                <div class="col-12 text-center my-4">
-                    <a href="{{ route('article.index') }}" class="btn btn-primary">Torna alle ricette</a>
-                </div>
+                
             </div>
             @if(Auth::user() && Auth::user()->is_revisor)
             <div class="row justify-content-center my-4">

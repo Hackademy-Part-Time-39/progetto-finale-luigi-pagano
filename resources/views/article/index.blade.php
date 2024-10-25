@@ -25,7 +25,7 @@
                         </thead>
                         <tbody>
                             @forelse($articles as $article)
-                                @if($article->user->id == Auth::user()->id)
+                               
                                     <tr>
                                         <td>{{ $article->title }}</td>
                                         <td>{{ $article->subtitle }}</td>
@@ -52,6 +52,7 @@
                                             </p>
 
                                             @auth
+                                            @if($article->user->id == Auth::user()->id)
                                                 <a href="{{ route('articles.edit', $article->id) }}"
                                                     class="btn btn-warning btn-sm">Modifica</a>
 
@@ -62,10 +63,11 @@
                                                     <button type="submit" class="btn btn-danger btn-sm"
                                                         onclick="return confirm('Sei sicuro di voler eliminare questo articolo?')">Elimina</button>
                                                 </form>
+                                                @endif
                                             @endauth
                                         </td>
                                     </tr>
-                                @endif
+                              
                             @empty
                                 <tr>
                                     <td colspan="6" class="text-center">Nessuna ricetta disponibile</td>
