@@ -22,7 +22,7 @@ class NewsletterController extends Controller
         ]);
 
         // Invia una mail di conferma (opzionale)
-        // Mail::to($request->email)->send(new SubscriptionConfirmation());
+        Mail::to($request->email)->send(new SubscriptionConfirmation());
 
         // Messaggio di successo e redirect
         return redirect()->back()->with('success', 'Iscrizione alla newsletter avvenuta con successo!');

@@ -166,3 +166,14 @@ h1, h2, h3, h4, h5, h6 {
     background-color: #0056b3; /* Colore al passaggio del mouse */
     border-color: #0056b3; /* Colore del bordo al passaggio del mouse */
 }
+
+.logo-image {
+    width: 150px;
+}
+
+.blog-brand {
+    font-weight: bold;
+    color: #061e4d;
+    font-size: 1.5rem;
+}
+

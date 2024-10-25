@@ -88,6 +88,8 @@
         </form>
     </div>
 
-
+    <script>
+        AOS.init();
+    </script>
 
 </x-layout>

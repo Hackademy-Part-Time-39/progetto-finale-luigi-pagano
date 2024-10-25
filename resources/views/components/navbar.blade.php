@@ -4,14 +4,16 @@
         <header>
             <div class="container">
                 <a href="{{ url('/') }}">
-                    <img src="{{ asset('/logo/logo.png') }}" alt="Logo del sito" style="width: 80px;">
+                    <img src="{{ asset('/logo/logo.png') }}" alt="Logo del sito" style="width: 65px;">
                 </a>
             </div>
         </header>
 
-        <img src="{{ asset('images/logo/logo.png') }}" alt="" style="width: 150px;>
-        <a class=" navbar-brand" href="/" style="font-weight: bold; color: #061e4d; font-size: 1.5rem;">Ma che
-        Blo(g)ntà</a>
+        <img src="{{ asset('images/logo/logo.png') }}" alt="" class="logo-image">
+<a class="navbar-brand blog-brand" href="/" aria-label="Ma che Blontà Home">
+    Ma che Blo(g)ntà
+</a>
+
 
         <!--  Menu for Mobile -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"

@@ -37,7 +37,7 @@
 
         <!-- Pulsante per tornare agli articoli -->
         <div class="col-12 text-center mt-4">
-            <a href="{{ route('articles.card') }}" class="btn btn-outline-primary">Torna alle ricette</a>
+        <a href="{{ url('/') }}" class="btn btn-primary">Torna alla Home</a>
         </div>
     </div>
 

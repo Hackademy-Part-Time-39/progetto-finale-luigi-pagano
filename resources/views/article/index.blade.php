@@ -1,4 +1,4 @@
-use Illuminate\Support\Facades\Auth;
+
 <x-layout>
     <div class="container mt-5">
         <!-- Messaggi di successo -->
@@ -77,7 +77,7 @@ use Illuminate\Support\Facades\Auth;
             </div>
         </div>
         <div class="col-12 mt-3">
-            <a href="{{ route('articles.index') }}" class="btn btn-primary">Torna alle ricette</a>
+            <a href="{{ url('/') }}" class="btn btn-primary">Torna alla Home</a>
         </div>
     </div>
 
