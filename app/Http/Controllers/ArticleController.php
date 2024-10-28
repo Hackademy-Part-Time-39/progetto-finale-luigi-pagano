@@ -9,6 +9,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Routing\Controllers\Middleware;
 
 class ArticleController extends Controller
@@ -88,53 +89,72 @@ class ArticleController extends Controller
 
 
     // Metodo per mostrare il form di modifica di un articolo
-    public function edit($id)
+    public function edit(Article $article)
     {
-        $article = Article::findOrFail($id);
-        $categories = Category::all(); 
-        return view('article.edit', compact('article', 'categories'));
+        if(Auth::user()->id == $article->user_id){
+        return view('article.edit', compact('article'));
     }
-
+    return redirect()->route('welcome')->with('alert', 'Accesso non consentito');
+}
     // Metodo per aggiornare un articolo nel database
-    public function update(Request $request, $id)
+    public function update(Request $request, Article $article)
 {
    
     // Validazione dei dati
     $request->validate([
-        'title' => 'required|string|max:255',
-        'subtitle' => 'required|string|max:255',
-        'body' => 'required|string',
-        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        'category_id' => 'required|exists:categories,id',
+        'title' => 'required|min:5|unique:articles,title,'.$article->id,
+        'subtitle' => 'required|string|min:5',
+        'body' => 'required|string|min:10',
+        'image' => 'image',
+        'category' => 'required',
+        'tags'=>'required'
     ]);
     
-    // Recupera l'articolo esistente
-    $article = Article::findOrFail($id);
+    $article->update([
+        'title'=> $request->title,
+        'subtitle'=> $request->subtitle,
+        'body'=> $request->body,
+        'category_id'=> $request->category
+    ]);
 
-    // Aggiorna i campi
-    $article->update($request->all());
 
-    // Se l'utente ha caricato una nuova image
-    if ($request->hasFile('image')) {
-        $article->image = $request->file('image')->store('images');
-        $article->save();
+    if ($request->image) {
+        Storage::delete($article->image);
+        $article->update([
+            'image'=> $request->file('image')->store('public/images')
+            ]);
     }
+    $tags = explode(',', $request->tags);
+    foreach ($tags as $i=>$tag) {
+        $tags[$i] =trim($tag);
 
-    // Reindirizza all'elenco degli articoli con un messaggio di successo
-    return redirect()->route('article.index')->with('success', 'Ricetta modificata con successo!');
+    
 
     }
+    $newTags = [];
+    foreach ($tags as $tag) {
+        $newTag= Tag::updateOrCreate([
+            'name'=>strtolower($tag)
+
+        ]);
+        $newTags[]= $newTag->id;
+    }
+    $article->tags()->sync($newTags);
+    return redirect(route('writer.dashboard'))->with('message','Ricetta modificata con successo');
+}
 
     // Metodo per eliminare un articolo dal database
-    public function destroy($id)
+    public function destroy(Article $article)
     {
         
-        $article = Article::findOrFail($id);
-        $article->delete();
+      foreach($article->tag as $tag) {
+        $article->tags()->detach($tag);
+      }
+      $article->delete();
+      return redirect()->back()->with('message','Ricetta cancellata con successo');
         
     
-        // Reindirizza all'elenco degli articoli con un messaggio di successo
-        return redirect()->route('article.index')->with('success', 'Ricetta eliminata con successo!');
+       
     }
  
 public function byUser($userId)

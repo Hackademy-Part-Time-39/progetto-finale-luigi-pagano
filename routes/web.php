@@ -3,6 +3,7 @@
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PublicController;
+use App\Http\Controllers\WriterController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\RevisorController;
 use App\Http\Controllers\NewsletterController;
@@ -13,7 +14,6 @@ Route::get('/articles/{article}', [ArticleController::class, 'show'])->name('art
 Route::get('/categories/{category}', [ArticleController::class, 'byCategory'])->name('articles.byCategory');
 Route::get('/users/{user}', [ArticleController::class, 'byUser'])->name('articles.byUser');
 Route::get('/', [PublicController::class, 'welcome'])->name('welcome');
-Route::get('/articles/{id}/edit', [ArticleController::class, 'edit'])->name('articles.edit');
 Route::get('/articles/{id}', [ArticleController::class, 'show'])->name('article.show');
 Route::get('/articles/index', [ArticleController::class, 'index'])->name('article.index');
 Route::get('/article', [ArticleController::class, 'index'])->name('article.index');
@@ -48,6 +48,10 @@ Route::middleware(['revisor'])->group(function () {
 Route::middleware('writer')->group(function () {
     Route::get('/article/create', [ArticleController::class, 'create'])->name('articles.create');
     Route::get('/article/store', [ArticleController::class, 'store'])->name('articles.store');
+    Route::get('/writer/dashboard', [WriterController::class, 'dashboard'])->name('writer.dashboard');
+    Route::get('/article/edit/{article}', [ArticleController::class, 'edit'])->name('article.edit');
+    Route::put('/article/update/{article}', [ArticleController::class, 'update'])->name('article.update');
+    Route::delete('/article/destroy/{article}', [ArticleController::class, 'destroy'])->name('article.destroy');
 
 });
 Route::get('/article/search', [ArticleController::class, 'articleSearch'])->name('article.search');
@@ -69,4 +73,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/article/store', [ArticleController::class, 'store'])->name('articles.store');
     
 });
+
+
 

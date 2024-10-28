@@ -9,17 +9,17 @@
         </div>
     </div>
 
-    <!-- Controlla se ci sono messaggi di sessione -->
+ 
     @if (session('message'))
         <div class="alert alert-success mt-3">
-            {{ session('msg') }}
+            {{ session('message') }}
         </div>
     @endif
     <div class="container ">
-        <!-- Sezione Articoli da revisionare -->
+   
         <div class="tablerevisor ">
             <h2 class="titletablerevisor">Ricette da revisionare</h2>
-            <!-- Verifica se ci sono articoli non revisionati -->
+      
             @if($unrevionedArticles->isEmpty())
                 <p class="text-muted">Non ci sono ricette da revisionare al momento.</p>
             @else
@@ -27,10 +27,10 @@
             @endif
         </div>
 
-        <!-- Sezione Articoli accettati -->
+   
         <div class="tablerevisor ">
             <h2 class="titletablerevisor">Ricette accettate</h2>
-            <!-- Verifica se ci sono articoli accettati -->
+           
             @if($acceptedArticles->isEmpty())
                 <p class="text-muted">Non ci sono ricette accettate.</p>
             @else
@@ -38,10 +38,10 @@
             @endif
         </div>
 
-        <!-- Sezione Articoli rifiutati -->
+        
         <div class="tablerevisor ">
             <h2 class="titletablerevisor">Ricette rifiutate</h2>
-            <!-- Verifica se ci sono articoli rifiutati -->
+           
             @if($rejectedArticles->isEmpty())
                 <p class="text-muted">Non ci sono ricette rifiutate.</p>
             @else

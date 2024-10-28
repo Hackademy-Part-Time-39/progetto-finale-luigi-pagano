@@ -66,6 +66,12 @@
                             <a class="nav-link" href="{{ route('revisor.dashboard') }}" style="font-weight: 500;">Dashboard
                                 Revisore</a>
                         </li>
+                        @elseif(Auth::user()->is_writer)
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('writer.dashboard') }}" style="font-weight: 500;">Dashboard
+                                Writer</a>
+                        </li>
+                    
                     @endif
 
                     <!-- User Greeting and Logout -->
