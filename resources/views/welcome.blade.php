@@ -13,7 +13,7 @@
         <h2 class="text-center mb-5">Ultimi Articoli</h2>
         
         <div class="row">
-            @foreach ($articles as $article)
+            @foreach ($recentArticles as $article)
                 <div class="col-md-4 mb-4">
                    
                     <x-article-card :article="$article" />

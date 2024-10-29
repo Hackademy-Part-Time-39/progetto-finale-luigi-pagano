@@ -1,7 +1,6 @@
 
 <x-layout>
     <div class="container mt-5">
-        <!-- Messaggi di successo -->
         @if (session('success'))
             <div class="alert alert-success">
                 {{ session('success') }}
@@ -53,7 +52,7 @@
 
                                             @auth
                                             @if($article->user->id == Auth::user()->id)
-                                                <a href="{{ route('articles.edit', $article->id) }}"
+                                                <a href="{{ route('articles.edit', $article) }}"
                                                     class="btn btn-warning btn-sm">Modifica</a>
 
                                                 <form action="{{ route('articles.destroy', $article->id) }}" method="POST"

@@ -13,12 +13,11 @@
     <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-md-6 login-container">
-                <h2 class="text-center mb-4 login-header">Accedi a The Aulab Post</h2>
+                <h2 class="text-center mb-4 login-header">Accedi a Ma che Blo(g)ntà</h2>
 
                 <form action="{{ route('login') }}" method="POST">
                     @csrf
 
-                    <!-- Campo Email -->
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
                         <input type="email" name="email" id="email" class="form-control" value="{{ old('email') }}"
@@ -28,7 +27,6 @@
                         @enderror
                     </div>
 
-                    <!-- Campo Password -->
                     <div class="mb-3">
                         <label for="password" class="form-label">Password</label>
                         <input type="password" name="password" id="password" class="form-control" required>
@@ -37,13 +35,11 @@
                         @enderror
                     </div>
 
-                    <!-- Checkbox per ricordami -->
                     <div class="mb-3 form-check">
                         <input type="checkbox" name="remember" id="remember" class="form-check-input">
                         <label for="remember" class="form-check-label">Ricordami</label>
                     </div>
 
-                    <!-- Pulsante di invio -->
                     <div class="d-grid">
                         <button type="submit" class="btn btn-primary">Accedi</button>
                     </div>

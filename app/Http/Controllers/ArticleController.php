@@ -21,7 +21,7 @@ class ArticleController extends Controller
         public function index()
         {
             // Prende tutti gli articoli ordinati dal più recente al più vecchio
-            $articles =         $recentArticles = Article::where('is_accepted', true)->orderBy('created_at', 'desc')->take(4)->get();
+            $articles = Article::where('user_id', Auth::id())->orderBy('created_at', 'desc')->take(4)->get();
             // Utilizza la paginazione, 6 articoli per pagina
     
             // Ritorna la vista 'article.index' passando gli articoli
@@ -48,11 +48,12 @@ class ArticleController extends Controller
         'category_id' => 'required|exists:categories,id',
         'tags'=>'required|max:255'
     ]);
+    
     $article = Article::create([
         'title'=>$request->title,
         'subtitle'=>$request->subtitle,
         'body'=>$request->body,
-        'image'=>$request->file('image')->store('public/images'),
+        'image'=>$request->file('image')->store('images'),
         'category_id'=>$request->category_id,
         'user_id'=>Auth::user()->id,
         'slug'=> Str::slug($request->title),
@@ -93,7 +94,7 @@ class ArticleController extends Controller
     // Metodo per mostrare il form di modifica di un articolo
     public function edit(Article $article)
     {
-        if(Auth::user()->id == $article->user_id){
+        if(Auth::user()->id == $article->user->id){
         return view('article.edit', compact('article'));
     }
     return redirect()->route('welcome')->with('alert', 'Accesso non consentito');

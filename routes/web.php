@@ -15,7 +15,6 @@ Route::get('/categories/{category}', [ArticleController::class, 'byCategory'])->
 Route::get('/users/{user}', [ArticleController::class, 'byUser'])->name('articles.byUser');
 Route::get('/', [PublicController::class, 'welcome'])->name('welcome');
 Route::get('/articles/{id}', [ArticleController::class, 'show'])->name('article.show');
-Route::get('/articles/index', [ArticleController::class, 'index'])->name('article.index');
 Route::get('/article', [ArticleController::class, 'index'])->name('article.index');
 Route::get('/article/category/{category}', [ArticleController::class, 'byCategory'])->name('article.byCategory');
 Route::get('/article/user/{user}', [ArticleController::class, 'byUser'])->name('article.byUser');
@@ -66,9 +65,9 @@ Route::get('/categories/{id}', [ArticleController::class, 'show'])->name('catego
 Route::middleware(['auth'])->group(function () {
 
     Route::post('/articles', [ArticleController::class, 'store'])->name('articles.store');
-    Route::get('/articles/{id}/edit', [ArticleController::class, 'edit'])->name('articles.edit');
-    Route::put('/articles/{id}', [ArticleController::class, 'update'])->name('articles.update');
-    Route::delete('/articles/{id}', [ArticleController::class, 'destroy'])->name('articles.destroy');
+    Route::get('/articles/{article}/edit', [ArticleController::class, 'edit'])->name('articles.edit');
+    Route::put('/articles/{article}', action: [ArticleController::class, 'update'])->name('articles.update');
+    Route::delete('/articles/{article}', [ArticleController::class, 'destroy'])->name('articles.destroy');
     Route::get('/article/create', [ArticleController::class, 'create'])->name('articles.create');
     Route::get('/article/store', [ArticleController::class, 'store'])->name('articles.store');
     

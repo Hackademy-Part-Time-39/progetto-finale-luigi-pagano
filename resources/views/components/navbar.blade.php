@@ -38,24 +38,20 @@
              
 
                 @auth
-                   <!-- Lavora con noi -->
                    <li class="nav-item">
                     <a class="nav-link" href="{{ route('careers') }}" style="font-weight: 500;">Lavora con noi</a>
                 </li>
 
-                    <!-- I miei articoli -->
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('articles.index') }}" style="font-weight: 500;">Le Mie
                             Ricette</a>
                     </li>
 
-                    <!-- Crea articolo -->
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('articles.create') }}" style="font-weight: 500;">Pubblica
                             Ricetta</a>
                     </li>
 
-                    <!-- Admin/Revisor Dashboard -->
                     @if(Auth::user()->is_admin)
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('admin.dashboard') }}" style="font-weight: 500;">Dashboard
@@ -74,7 +70,6 @@
                     
                     @endif
 
-                    <!-- User Greeting and Logout -->
                     <li class="nav-item">
                         <a class="nav-link" href="#" style="font-weight: 500;">Ciao, {{ Auth::user()->name }}</a>
                     </li>
@@ -88,12 +83,10 @@
                 @endauth
 
                 @guest
-                    <!-- Login -->
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('login') }}" style="font-weight: 500;">Login</a>
                     </li>
 
-                    <!-- registrati -->
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('register') }}" style="font-weight: 500;">Registrati</a>
                     </li>

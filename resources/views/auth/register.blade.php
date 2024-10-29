@@ -13,12 +13,11 @@
     <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-md-6 register-container">
-                <h2 class="text-center mb-4 register-header">Registrati su The Aulab Post</h2>
+                <h2 class="text-center mb-4 register-header">Registrati su  Ma che Blo(g)ntà</h2>
 
                 <form action="{{ route('register') }}" method="POST">
-                    @csrf <!-- Token di sicurezza per proteggere il form -->
+                    @csrf 
 
-                    <!-- Campo Nome -->
                     <div class="mb-3">
                         <label for="name" class="form-label">Nome</label>
                         <input type="text" name="name" id="name" class="form-control" value="{{ old('name') }}" required
@@ -28,7 +27,6 @@
                         @enderror
                     </div>
 
-                    <!-- Campo Email -->
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
                         <input type="email" name="email" id="email" class="form-control" value="{{ old('email') }}"
@@ -38,7 +36,6 @@
                         @enderror
                     </div>
 
-                    <!-- Campo Password -->
                     <div class="mb-3">
                         <label for="password" class="form-label">Password</label>
                         <input type="password" name="password" id="password" class="form-control" required>
@@ -47,14 +44,12 @@
                         @enderror
                     </div>
 
-                    <!-- Campo Conferma Password -->
                     <div class="mb-3">
                         <label for="password_confirmation" class="form-label">Conferma Password</label>
                         <input type="password" name="password_confirmation" id="password_confirmation"
                             class="form-control" required>
                     </div>
 
-                    <!-- Pulsante di invio -->
                     <div class="d-grid">
                         <button type="submit" class="btn btn-primary">Registrati</button>
                     </div>

@@ -15,7 +15,6 @@
                 <td>{{ $user->name }}</td>
                 <td>{{ $user->email }}</td>
                 <td>
-                    {{-- Mostra il ruolo richiesto --}}
                     <span class="badge bg-secondary">{{ ucfirst($role) }}</span>
                 </td>
                 <td>
@@ -36,7 +35,7 @@
                             </form>
                             @break
 
-                        @case('Redattore')
+                        @case('Scrittore')
                             <form action="{{ route('admin.setWriter', $user) }}" method="POST" class="d-inline">
                                 @csrf
                                 @method('PATCH')
