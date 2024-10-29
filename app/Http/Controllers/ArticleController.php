@@ -6,6 +6,7 @@ use App\Models\Tag;
 use App\Models\User;
 use App\Models\Article;
 use App\Models\Category;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -54,6 +55,7 @@ class ArticleController extends Controller
         'image'=>$request->file('image')->store('public/images'),
         'category_id'=>$request->category_id,
         'user_id'=>Auth::user()->id,
+        'slug'=> Str::slug($request->title),
     ]);
     $tags =explode(',' , $request->tags);
     foreach($tags as $i=>$tag){
@@ -114,7 +116,8 @@ class ArticleController extends Controller
         'title'=> $request->title,
         'subtitle'=> $request->subtitle,
         'body'=> $request->body,
-        'category_id'=> $request->category
+        'category_id'=> $request->category,
+        'slug'=> Str::slug($request->title),
     ]);
 
 
