@@ -36,11 +36,13 @@
                         <li class="nav-item">
                             <a class="nav-link fw-semibold" href="{{ route('admin.dashboard') }}">Dashboard Admin</a>
                         </li>
-                    @elseif(Auth::user()->is_revisor)
+                        @endif
+                    @if(Auth::user()->is_revisor)
                         <li class="nav-item">
                             <a class="nav-link fw-semibold" href="{{ route('revisor.dashboard') }}">Dashboard Revisore</a>
                         </li>
-                    @elseif(Auth::user()->is_writer)
+                        @endif
+                    @if(Auth::user()->is_writer)
                         <li class="nav-item">
                             <a class="nav-link fw-semibold" href="{{ route('writer.dashboard') }}">Dashboard Writer</a>
                         </li>
