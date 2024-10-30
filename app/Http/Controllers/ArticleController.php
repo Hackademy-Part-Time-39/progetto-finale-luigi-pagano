@@ -151,9 +151,11 @@ class ArticleController extends Controller
     public function destroy(Article $article)
     {
         
-      foreach($article->tag as $tag) {
-        $article->tags()->detach($tag);
-      }
+        if($article->tag){
+            foreach($article->tag as $tag) {
+              $article->tags()->detach($tag);
+            }
+        }
       $article->delete();
       return redirect()->back()->with('message','Ricetta cancellata con successo');
         

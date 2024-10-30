@@ -26,7 +26,7 @@
                 <td>
                     <a href="{{ route('article.show', $article) }}" class="btn btn-secondary">Leggi</a>
                     <a href="{{ route('article.edit', $article) }}" class="btn btn-warning text-white">Modifica</a>
-                    <form action="#" method="POST" class="d-inline">
+                    <form action="{{route('articles.destroy', $article)}}" method="POST" class="d-inline">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger">Elimina</button>
