@@ -150,9 +150,9 @@ class ArticleController extends Controller
     // Metodo per eliminare un articolo dal database
     public function destroy(Article $article)
     {
-        
-        if($article->tag){
-            foreach($article->tag as $tag) {
+   
+        if($article->tags){
+            foreach($article->tags as $tag) {
               $article->tags()->detach($tag);
             }
         }
