@@ -1,4 +1,3 @@
-
 <x-layout>
     <div class="container mt-5">
         @if (session('success'))
@@ -24,33 +23,31 @@
                         </thead>
                         <tbody>
                             @forelse($articles as $article)
-                               
-                                    <tr>
-                                        <td>{{ $article->title }}</td>
-                                        <td>{{ $article->subtitle }}</td>
-                                        <td>{{ $article->user->name }}</td>
-                                        <td>{{ $article->category ? $article->category->name : 'N/A' }}</td>
-                                        <td>{{ $article->created_at->format('d/m/Y') }}</td>
-                                        <td>
-                                            <a href="{{ route('article.show', $article) }}"
-                                                class="btn btn-primary btn-sm">Leggi</a>
-                                            @if ($article->category)
-                                                <a href="{{ route('article.byCategory', $article->category) }}"
-                                                    class=" badge bg-secondary text-capitalize text-muted">{{ $article->category->name }}>
-                                            @else
-                                                <p class="small text-muted">Nessuna categoria</p>
-                                            @endif
+                                <tr>
+                                    <td>{{ $article->title }}</td>
+                                    <td>{{ $article->subtitle }}</td>
+                                    <td>{{ $article->user->name }}</td>
+                                    <td>{{ $article->category ? $article->category->name : 'N/A' }}</td>
+                                    <td>{{ $article->created_at->format('d/m/Y') }}</td>
+                                    <td>
+                                        <a href="{{ route('article.show', $article) }}" class="btn btn-primary btn-sm">Leggi</a>
+                                        @if ($article->category)
+                                            <a href="{{ route('article.byCategory', $article->category) }}"
+                                                class="badge bg-secondary text-capitalize text-muted">
                                                 {{ $article->category->name }}
                                             </a>
-                                            <p class="mb-1">
-                                                Pubblicato da:
-                                                <a href="{{ route('article.byUser', $article->user) }}"
-                                                    class="text-decoration-none">
-                                                    {{ $article->user->name }}
-                                                </a>
-                                            </p>
+                                        @else
+                                            <span class="small text-muted">Nessuna categoria</span>
+                                        @endif
+                                        <p class="mb-1">
+                                            Pubblicato da:
+                                            <a href="{{ route('article.byUser', $article->user) }}"
+                                                class="text-decoration-none">
+                                                {{ $article->user->name }}
+                                            </a>
+                                        </p>
 
-                                            @auth
+                                        @auth
                                             @if($article->user->id == Auth::user()->id)
                                                 <a href="{{ route('articles.edit', $article) }}"
                                                     class="btn btn-warning btn-sm">Modifica</a>
@@ -62,11 +59,10 @@
                                                     <button type="submit" class="btn btn-danger btn-sm"
                                                         onclick="return confirm('Sei sicuro di voler eliminare questo articolo?')">Elimina</button>
                                                 </form>
-                                                @endif
-                                            @endauth
-                                        </td>
-                                    </tr>
-                              
+                                            @endif
+                                        @endauth
+                                    </td>
+                                </tr>
                             @empty
                                 <tr>
                                     <td colspan="6" class="text-center">Nessuna ricetta disponibile</td>
@@ -83,6 +79,6 @@
     </div>
 
     <style>
-
+       
     </style>
 </x-layout>

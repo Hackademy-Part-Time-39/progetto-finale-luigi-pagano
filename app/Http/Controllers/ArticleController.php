@@ -125,7 +125,7 @@ class ArticleController extends Controller
     if ($request->image) {
         Storage::delete($article->image);
         $article->update([
-            'image'=> $request->file('image')->store('public/images')
+            'image' => $request->file('image')->store('images', 'public'),
             ]);
     }
     $tags = explode(',', $request->tags);

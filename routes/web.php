@@ -11,7 +11,6 @@ use App\Http\Controllers\NewsletterController;
 Route::get('/articles/all', [ArticleController::class, 'indexAll'])->name('articles.card');
 Route::get('/articles',  [ArticleController::class, 'index'])->middleware('auth')->name('articles.index');
 Route::get('/articles/{article}', [ArticleController::class, 'show'])->name('articles.show');
-Route::get('/categories/{category}', [ArticleController::class, 'byCategory'])->name('articles.byCategory');
 Route::get('/users/{user}', [ArticleController::class, 'byUser'])->name('articles.byUser');
 Route::get('/', [PublicController::class, 'welcome'])->name('welcome');
 Route::get('/articles/{id}', [ArticleController::class, 'show'])->name('article.show');
